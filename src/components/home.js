@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Relay from 'react-relay';
 import {
+  AsyncStorage,
   Text,
   View,
   TouchableHighlight
@@ -23,14 +24,34 @@ const styles = {
   textRegister: {
     fontSize: 20,
     textAlign: 'center'
-  },
+  }
 };
 
 export class Home extends Component {
+  static propTypes = {
+    navigator: PropTypes.any
+  };
+
   constructor() {
     super();
     this.renderTop = this.renderTop.bind(this);
     this.renderBottom = this.renderBottom.bind(this);
+  }
+
+  componentDidMount() {
+    this.checkLogin()
+      .then((token) => {
+        if(token) {
+          // todo: to smt here
+        }
+      })
+      .catch(console.log)
+  }
+
+  checkLogin() {
+    return new Promise((resolve) => {
+      resolve(AsyncStorage.getItem(`accessToken`));
+    });
   }
 
   handleLogin() {
