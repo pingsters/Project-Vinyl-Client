@@ -7,6 +7,9 @@ import {
 } from 'react-native';
 import RegisterMutation from '../mutations/register';
 
+import { mapNavigatorRoute } from '../navigator/navigatorRoutes';
+
+
 const styles = {
   container: {
     flex: 1,
@@ -90,8 +93,11 @@ export class Home extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
-        <TouchableHighlight onPress={() => register("fffffffddff@gfmail.com", "fzzzfff", "12a34")}>
+        <TouchableHighlight onPress={() => register("fffffffddrewrewff@gfmail.com", "fzzzfff", "12a34")}>
           <Text>Register</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={() => this.props.navigator.push(mapNavigatorRoute())}>
+          <Text>goToMapView</Text>
         </TouchableHighlight>
       </View>
     );
