@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 export class Map extends Component {
   state = {
     center: {
-      latitude: 37.53601435685916,
+      latitude: 36.53601435685916,
       longitude: 127.1368545604094
     },
     zoom: 11,
@@ -102,6 +102,9 @@ export class Map extends Component {
   };
   onUpdateUserLocation = (location) => {
     console.log('onUpdateUserLocation', location);
+    this._map.getBounds(bounds => {
+      console.log(bounds);
+    });
   };
   onOpenAnnotation = (annotation) => {
     console.log('onOpenAnnotation', annotation);
@@ -194,10 +197,9 @@ export class Map extends Component {
           initialCenterCoordinate={this.state.center}
           initialZoomLevel={14}
           initialDirection={0}
-          rotateEnabled={true}
           scrollEnabled={true}
           zoomEnabled={true}
-          showsUserLocation={false}
+          showsUserLocation={true}
           styleURL={Mapbox.mapStyles.light}
           userTrackingMode={this.state.userTrackingMode}
           annotations={this.state.annotations}
