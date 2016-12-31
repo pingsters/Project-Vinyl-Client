@@ -19,7 +19,7 @@ const styles = {
     justifyContent: 'center',
   },
   mapBox: {
-    flex: 6,
+    flex: 8,
     alignItems: 'stretch',
     marginBottom:-30,
   },
@@ -28,11 +28,15 @@ const styles = {
   },
   textLogin: {
     fontSize: 20,
+    fontWeight:'bold',
     textAlign: 'center',
+    color:'white',
   },
   textRegister: {
     fontSize: 20,
+    fontWeight:'bold',
     textAlign: 'center',
+    color:'white',
   }
 };
 
@@ -186,6 +190,8 @@ export class Home extends Component {
           userTrackingMode={this.state.userTrackingMode}
           annotations={this.state.annotations}
           annotationsAreImmutable
+          styleURL={Mapbox.mapStyles.light}
+          logoIsHidden={true}
           onChangeUserTrackingMode={this.onChangeUserTrackingMode}
           onRegionDidChange={this.onRegionDidChange}
           onRegionWillChange={this.onRegionWillChange}
@@ -203,14 +209,14 @@ export class Home extends Component {
     return (
       <View style={{ flex: 2 }}>
         <TouchableHighlight
-          style={{ flex:1 , backgroundColor: '#e2462b', justifyContent: 'center' }}
+          style={{ flex:1 , backgroundColor: '#ff6666', justifyContent: 'center' }}
           onPress={this.handleLogin.bind(this)}>
           <Text style={styles.textLogin}>
             Login
           </Text>
         </TouchableHighlight>
         <TouchableHighlight
-          style={{ flex: 1, backgroundColor: '#2b3ee5', justifyContent: 'center' }}
+          style={{ flex: 1, backgroundColor: '#0099ff', justifyContent: 'center' }}
           onPress={this.handleRegister.bind(this)}>
           <Text style={styles.textRegister}>
             Register
