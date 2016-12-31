@@ -34,10 +34,6 @@ const styles = {
 };
 
 export class Register extends Component {
-  static propTypes = {
-    Users: PropTypes.Object
-  };
-
   constructor() {
     super();
     this.state = {

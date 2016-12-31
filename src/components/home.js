@@ -10,33 +10,33 @@ import {
 import {
   mapNavigatorRoute,
   loginNavigatorRoute,
-  registerNavigatorRoute,
+  registerNavigatorRoute
 } from '../navigator/navigatorRoutes';
 
 const styles = {
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   mapBox: {
     flex: 8,
     alignItems: 'stretch',
-    marginBottom:-30,
+    marginBottom: -30
   },
   map: {
     flex: 1
   },
   textLogin: {
     fontSize: 20,
-    fontWeight:'bold',
+    fontWeight: 'bold',
     textAlign: 'center',
-    color:'white',
+    color: 'white'
   },
   textRegister: {
     fontSize: 20,
-    fontWeight:'bold',
+    fontWeight: 'bold',
     textAlign: 'center',
-    color:'white',
+    color: 'white'
   }
 };
 
@@ -69,7 +69,7 @@ export class Home extends Component {
       },
       id: 'marker1'
     }, {
-      coordinates: [40.714541341726175,-74.00579452514648],
+      coordinates: [40.714541341726175, -74.00579452514648],
       type: 'point',
       title: 'Important!',
       subtitle: 'Neat, this is a custom annotation image',
@@ -80,14 +80,14 @@ export class Home extends Component {
       },
       id: 'marker2'
     }, {
-      coordinates: [[40.76572150042782,-73.99429321289062],[40.743485405490695, -74.00218963623047],[40.728266950429735,-74.00218963623047],[40.728266950429735,-73.99154663085938],[40.73633186448861,-73.98983001708984],[40.74465591168391,-73.98914337158203],[40.749337730454826,-73.9870834350586]],
+      coordinates: [[40.76572150042782, -73.99429321289062], [40.743485405490695, -74.00218963623047], [40.728266950429735, -74.00218963623047], [40.728266950429735, -73.99154663085938], [40.73633186448861, -73.98983001708984], [40.74465591168391, -73.98914337158203], [40.749337730454826, -73.9870834350586]],
       type: 'polyline',
       strokeColor: '#00FB00',
       strokeWidth: 4,
-      strokeAlpha: .5,
+      strokeAlpha: 0.5,
       id: 'foobar'
     }, {
-      coordinates: [[40.749857912194386, -73.96820068359375], [40.741924698522055,-73.9735221862793], [40.735681504432264,-73.97523880004883], [40.7315190495212,-73.97438049316406], [40.729177554196376,-73.97180557250975], [40.72345355209305,-73.97438049316406], [40.719290332250544,-73.97455215454102], [40.71369559554873,-73.97729873657227], [40.71200407096382,-73.97850036621094], [40.71031250340588,-73.98691177368163], [40.71031250340588,-73.99154663085938]],
+      coordinates: [[40.749857912194386, -73.96820068359375], [40.741924698522055, -73.9735221862793], [40.735681504432264, -73.97523880004883], [40.7315190495212, -73.97438049316406], [40.729177554196376, -73.97180557250975], [40.72345355209305, -73.97438049316406], [40.719290332250544, -73.97455215454102], [40.71369559554873, -73.97729873657227], [40.71200407096382, -73.97850036621094], [40.71031250340588, -73.98691177368163], [40.71031250340588, -73.99154663085938]],
       type: 'polygon',
       fillAlpha: 1,
       strokeColor: '#ffffff',
@@ -105,16 +105,16 @@ export class Home extends Component {
   componentDidMount() {
     this.checkLogin()
       .then((token) => {
-        if(token) {
+        if (token) {
           // todo: to smt here
         }
       })
-      .catch(console.log)
+      .catch(console.log);
   }
 
   checkLogin() {
     return new Promise((resolve) => {
-      resolve(AsyncStorage.getItem(`accessToken`));
+      resolve(AsyncStorage.getItem('accessToken'));
     });
   }
 
@@ -138,6 +138,18 @@ export class Home extends Component {
     this._map.getBounds(bounds => {
       console.log(bounds);
     });
+    //sendQueries(queryRequests) {
+    //  return Promise.all(queryRequests.map(
+    //    queryRequest => fetch(...).then(result => {
+    //      if (result.errors) {
+    //        queryRequest.reject(new Error(...));
+    //      } else {
+    //        queryRequest.resolve({response: result.data});
+    //      }
+    //    })
+    //  ));
+    //}
+
   };
   onOpenAnnotation = (annotation) => {
     console.log('onOpenAnnotation', annotation);
@@ -179,12 +191,15 @@ export class Home extends Component {
     return (
       <View style={styles.mapBox}>
         <MapView
-          ref={map => { this._map = map; }}
+          ref={map => {
+            this._map = map;
+          }}
           style={styles.map}
           initialCenterCoordinate={this.state.center}
           initialZoomLevel={14}
           initialDirection={0}
           scrollEnabled={true}
+          rotateEnabled={false}
           zoomEnabled={true}
           showsUserLocation={true}
           userTrackingMode={this.state.userTrackingMode}
@@ -209,7 +224,7 @@ export class Home extends Component {
     return (
       <View style={{ flex: 2 }}>
         <TouchableHighlight
-          style={{ flex:1 , backgroundColor: '#ff6666', justifyContent: 'center' }}
+          style={{ flex: 1, backgroundColor: '#ff6666', justifyContent: 'center' }}
           onPress={this.handleLogin.bind(this)}>
           <Text style={styles.textLogin}>
             Login
@@ -241,5 +256,5 @@ export default Relay.createContainer(Home, {
   initialVariables: {
   },
   fragments: {
-  },
+  }
 });
