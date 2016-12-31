@@ -8,6 +8,9 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
+import {
+  mapNavigatorRoute
+} from '../navigator/navigatorRoutes';
 import { login } from './../auth/auth';
 
 const styles = {
@@ -35,7 +38,6 @@ const styles = {
 };
 
 export class Login extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -50,6 +52,9 @@ export class Login extends Component {
       login(this.state.userEmail, this.state.password)
         .then((data) => {
           return AsyncStorage.setItem(`accessToken`, data.getToken.user.accessToken);
+        })
+        .then(() => {
+          this.props.navigator.push(mapNavigatorRoute());
         })
         .catch(console.log);
     }
@@ -87,6 +92,5 @@ export default Relay.createContainer(Login, {
   initialVariables: {
     orderBy: null
   },
-  fragments: {
-  }
+  fragments: {}
 });

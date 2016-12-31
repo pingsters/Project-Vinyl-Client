@@ -7,6 +7,9 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
+import {
+  loginNavigatorRoute
+} from '../navigator/navigatorRoutes';
 import { register } from './../auth/auth';
 
 const styles = {
@@ -45,7 +48,11 @@ export class Register extends Component {
 
   handleRegisterButton() {
     if (this.state.userName && this.state.password && this.state.userEmail) {
-      register(this.state.userEmail, this.state.userName, this.state.password);
+      register(this.state.userEmail, this.state.userName, this.state.password)
+        .then(() => {
+          this.props.navigator.push(loginNavigatorRoute());
+        })
+        .catch(console.log);
     }
     else {
       Alert.alert(
@@ -87,16 +94,5 @@ export default Relay.createContainer(Register, {
   initialVariables: {
     orderBy: null
   },
-  fragments: {
-    Users: () => {
-      return Relay.QL `
-          fragment on User {
-              _id,
-              email,
-              name,
-              createdAt
-          }
-      `;
-    }
-  }
+  fragments: {}
 });

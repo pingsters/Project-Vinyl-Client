@@ -8,7 +8,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 import {
-  mapNavigatorRoute,
   loginNavigatorRoute,
   registerNavigatorRoute
 } from '../navigator/navigatorRoutes';
@@ -43,7 +42,7 @@ const styles = {
 export class Home extends Component {
   static propTypes = {
     navigator: PropTypes.any
-  }
+  };
 
   state = {
     center: {
@@ -231,7 +230,8 @@ export class Home extends Component {
           </Text>
         </TouchableHighlight>
         <TouchableHighlight
-          style={{ flex: 1, backgroundColor: '#0099ff', justifyContent: 'center' }}
+
+          style={{ flex: 1, backgroundColor: '#42dcf4', justifyContent: 'center' }}
           onPress={this.handleRegister.bind(this)}>
           <Text style={styles.textRegister}>
             Register
