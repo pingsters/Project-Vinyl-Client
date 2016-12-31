@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 export class Map extends Component {
   state = {
     center: {
-      latitude: 36.53601435685916,
+      latitude: 37.53601435685916,
       longitude: 127.1368545604094
     },
     zoom: 11,
