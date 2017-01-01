@@ -10,7 +10,6 @@ import RegisterRoute from './../routes/registerRoute';
 
 export function homeNavigatorRoute() {
   return {
-    // Home is a Relay.Container
     Component: Home,
     queryConfig: new HomeRoute()
   };
@@ -18,7 +17,6 @@ export function homeNavigatorRoute() {
 
 export function loginNavigatorRoute() {
   return {
-    // Home is a Relay.Container
     Component: Login,
     queryConfig: new LoginRoute()
   };
@@ -26,7 +24,6 @@ export function loginNavigatorRoute() {
 
 export function registerNavigatorRoute() {
   return {
-    // Home is a Relay.Container
     Component: Register,
     queryConfig: new RegisterRoute()
   };

@@ -91,6 +91,10 @@ export class Map extends Component {
       const lastPosition = JSON.stringify(position);
       this.setState({lastPosition});
     });
+    this.props.relay.setVariables({
+      bottomLeft: [0,1],
+      upperRight: [2,3]
+    })
   }
 
   onRegionDidChange = (location) => {
@@ -117,6 +121,7 @@ export class Map extends Component {
   };
   onTap = (location) => {
     console.log('onTap', location);
+    console.log(this.props);
   };
   onChangeUserTrackingMode = (userTrackingMode) => {
     this.setState({ userTrackingMode });
@@ -258,7 +263,6 @@ export class Map extends Component {
           Remove marker2 annotation
         </Text>
         <Text onPress={() => this.setState({ annotations: [] })}>
-          Remove all annotations
         </Text>
         <Text onPress={() => this._map && this._map.setVisibleCoordinateBounds(40.712, -74.227, 40.774, -74.125, 100, 0, 0, 0)}>
           Set visible bounds to 40.7, -74.2, 40.7, -74.1
@@ -328,10 +332,30 @@ export class Map extends Component {
       </View>
     );
   }
-
 }
 
 export default Relay.createContainer(Map, {
-  initialVariables: {},
-  fragments: {}
+  initialVariables: {
+    bottomLeft: [0,1],
+    upperRight: [2,3]
+  },
+  fragments: {
+    enteredUsers: (variables) => {
+      console.log(variables);
+      return Relay.QL `
+        fragment on rootQuery{
+          enteredUsers(bottomLeft: $bottomLeft, upperRight: $upperRight) {
+            _id,
+            email,
+            name,
+            point {
+                type,
+                bbox,
+                coordinates
+            }
+          }
+        }
+      `
+    }
+  }
 });

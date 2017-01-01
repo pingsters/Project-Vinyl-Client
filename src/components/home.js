@@ -185,7 +185,6 @@ export class Home extends Component {
     this._offlineErrorSubscription.remove();
   }
 
-
   renderTop() {
     return (
       <View style={styles.mapBox}>
@@ -253,8 +252,6 @@ export class Home extends Component {
 }
 
 export default Relay.createContainer(Home, {
-  initialVariables: {
-  },
-  fragments: {
-  }
+  initialVariables: {},
+  fragments: {}
 });

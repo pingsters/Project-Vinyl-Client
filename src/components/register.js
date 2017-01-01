@@ -91,8 +91,6 @@ export class Register extends Component {
 }
 
 export default Relay.createContainer(Register, {
-  initialVariables: {
-    orderBy: null
-  },
+  initialVariables: {},
   fragments: {}
 });

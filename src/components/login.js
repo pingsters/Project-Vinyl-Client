@@ -50,8 +50,16 @@ export class Login extends Component {
   handleLoginButton() {
     if (this.state.userEmail && this.state.password) {
       login(this.state.userEmail, this.state.password)
-        .then((data) => {
-          return AsyncStorage.setItem(`accessToken`, data.getToken.user.accessToken);
+        .then(data => data.getToken.user.accessToken)
+        .then((token) => {
+          Relay.injectNetworkLayer(
+            new Relay.DefaultNetworkLayer('http://220.76.27.58:5001/graphql', {
+              headers: {
+                Authorization: token
+              }
+            })
+          );
+          return AsyncStorage.setItem(`accessToken`, token);
         })
         .then(() => {
           this.props.navigator.push(mapNavigatorRoute());
@@ -89,8 +97,6 @@ export class Login extends Component {
 }
 
 export default Relay.createContainer(Login, {
-  initialVariables: {
-    orderBy: null
-  },
+  initialVariables: {},
   fragments: {}
 });
