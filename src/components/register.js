@@ -43,7 +43,7 @@ export class Register extends Component {
       userName: undefined,
       password: undefined,
       userEmail: undefined
-    }
+    };
   }
 
   handleRegisterButton() {
@@ -53,8 +53,7 @@ export class Register extends Component {
           this.props.navigator.push(loginNavigatorRoute());
         })
         .catch(console.log);
-    }
-    else {
+    } else {
       Alert.alert(
         'OMG, TYPE SOMETHING'
       );

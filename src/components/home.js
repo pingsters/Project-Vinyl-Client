@@ -109,6 +109,11 @@ export class Home extends Component {
         }
       })
       .catch(console.log);
+    console.log(this.props.guest);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
   }
 
   checkLogin() {
@@ -128,16 +133,18 @@ export class Home extends Component {
   onRegionDidChange = (location) => {
     this.setState({ currentZoom: location.zoomLevel });
     console.log('onRegionDidChange', location);
-  };
-  onRegionWillChange = (location) => {
-    console.log('onRegionWillChange', location);
-  };
-  onUpdateUserLocation = (location) => {
-    console.log('onUpdateUserLocation', location);
     this._map.getBounds(bounds => {
+      this.props.relay.setVariables({box: [bounds[0], bounds[1], bounds[2], bounds[3]]});
       console.log(bounds);
     });
-    //sendQueries(queryRequests) {
+  };
+  onRegionWillChange = (location) => {
+    // console.log('onRegionWillChange', location);
+  };
+  onUpdateUserLocation = (location) => {
+    // console.log('onUpdateUserLocation', location);
+
+    // sendQueries(queryRequests) {
     //  return Promise.all(queryRequests.map(
     //    queryRequest => fetch(...).then(result => {
     //      if (result.errors) {
@@ -147,24 +154,24 @@ export class Home extends Component {
     //      }
     //    })
     //  ));
-    //}
+    // }
 
   };
   onOpenAnnotation = (annotation) => {
-    console.log('onOpenAnnotation', annotation);
+    // console.log('onOpenAnnotation', annotation);
   };
   onRightAnnotationTapped = (e) => {
-    console.log('onRightAnnotationTapped', e);
+    // console.log('onRightAnnotationTapped', e);
   };
   onLongPress = (location) => {
-    console.log('onLongPress', location);
+    // console.log('onLongPress', location);
   };
   onTap = (location) => {
-    console.log('onTap', location);
+    // console.log('onTap', location);
   };
   onChangeUserTrackingMode = (userTrackingMode) => {
     this.setState({ userTrackingMode });
-    console.log('onChangeUserTrackingMode', userTrackingMode);
+    // console.log('onChangeUserTrackingMode', userTrackingMode);
   };
 
   componentWillMount() {
@@ -202,7 +209,7 @@ export class Home extends Component {
           zoomEnabled={true}
           showsUserLocation={true}
           userTrackingMode={this.state.userTrackingMode}
-          annotations={this.state.annotations}
+          annotations={this.props.guest.enteredUser}
           annotationsAreImmutable
           styleURL={Mapbox.mapStyles.light}
           logoIsHidden={true}
@@ -254,7 +261,17 @@ export class Home extends Component {
 
 export default Relay.createContainer(Home, {
   initialVariables: {
+    box: [0, 0, 0, 0]
   },
   fragments: {
+    guest: () => Relay.QL`
+        fragment on Guest{
+            enteredUser(box:$box){
+                id:_id
+                coordinates:point
+                type
+            }
+        }
+    `
   }
 });

@@ -95,32 +95,32 @@ export class Map extends Component {
 
   onRegionDidChange = (location) => {
     this.setState({ currentZoom: location.zoomLevel });
-    console.log('onRegionDidChange', location);
+    // console.log('onRegionDidChange', location);
   };
   onRegionWillChange = (location) => {
-    console.log('onRegionWillChange', location);
+    // console.log('onRegionWillChange', location);
   };
   onUpdateUserLocation = (location) => {
-    console.log('onUpdateUserLocation', location);
+    // console.log('onUpdateUserLocation', location);
     this._map.getBounds(bounds => {
       console.log(bounds);
     });
   };
   onOpenAnnotation = (annotation) => {
-    console.log('onOpenAnnotation', annotation);
+    // console.log('onOpenAnnotation', annotation);
   };
   onRightAnnotationTapped = (e) => {
-    console.log('onRightAnnotationTapped', e);
+    // console.log('onRightAnnotationTapped', e);
   };
   onLongPress = (location) => {
-    console.log('onLongPress', location);
+    // console.log('onLongPress', location);
   };
   onTap = (location) => {
     console.log('onTap', location);
   };
   onChangeUserTrackingMode = (userTrackingMode) => {
     this.setState({ userTrackingMode });
-    console.log('onChangeUserTrackingMode', userTrackingMode);
+    // console.log('onChangeUserTrackingMode', userTrackingMode);
   };
 
   componentWillMount() {
@@ -325,6 +325,7 @@ export class Map extends Component {
           Remove pack with name 'test'
         </Text>
         <Text>User tracking mode is {this.state.userTrackingMode}</Text>
+        <Text>{JSON.stringify(this.props.enteredUsers)}</Text>
       </View>
     );
   }
@@ -332,6 +333,18 @@ export class Map extends Component {
 }
 
 export default Relay.createContainer(Map, {
-  initialVariables: {},
-  fragments: {}
+  initialVariables: {
+    bottomLeft: [0, 1],
+    upperRight: [4, 20]
+  },
+  fragments: {
+    points: () => Relay.QL`
+          fragment on User {
+              point {
+                  type
+                  coordinates
+              }
+          }
+      `
+  }
 });
