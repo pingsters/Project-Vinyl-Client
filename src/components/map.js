@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
-import Relay from 'react-relay';
 import {
   Text,
   StyleSheet,
@@ -26,7 +25,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export class Map extends Component {
+export default class Map extends Component {
   state = {
     center: {
       latitude: 37.53601435685916,
@@ -333,29 +332,3 @@ export class Map extends Component {
     );
   }
 }
-
-export default Relay.createContainer(Map, {
-  initialVariables: {
-    bottomLeft: [0,1],
-    upperRight: [2,3]
-  },
-  fragments: {
-    enteredUsers: (variables) => {
-      console.log(variables);
-      return Relay.QL `
-        fragment on rootQuery{
-          enteredUsers(bottomLeft: $bottomLeft, upperRight: $upperRight) {
-            _id,
-            email,
-            name,
-            point {
-                type,
-                bbox,
-                coordinates
-            }
-          }
-        }
-      `
-    }
-  }
-});

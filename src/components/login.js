@@ -37,7 +37,7 @@ const styles = {
   }
 };
 
-export class Login extends Component {
+export default class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -46,6 +46,10 @@ export class Login extends Component {
       registerOnProgress: false
     }
   }
+
+  static propTypes = {
+    navigator: PropTypes.any
+  };
 
   handleLoginButton() {
     if (this.state.userEmail && this.state.password) {
@@ -95,8 +99,3 @@ export class Login extends Component {
     );
   }
 }
-
-export default Relay.createContainer(Login, {
-  initialVariables: {},
-  fragments: {}
-});

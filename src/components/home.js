@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import Mapbox, { MapView } from 'react-native-mapbox-gl';
-import Relay from 'react-relay';
 import {
   AsyncStorage,
   Text,
@@ -39,7 +38,7 @@ const styles = {
   }
 };
 
-export class Home extends Component {
+export default class Home extends Component {
   static propTypes = {
     navigator: PropTypes.any
   };
@@ -250,8 +249,3 @@ export class Home extends Component {
     );
   }
 }
-
-export default Relay.createContainer(Home, {
-  initialVariables: {},
-  fragments: {}
-});
