@@ -51,8 +51,10 @@ export default class Register extends Component {
 
   handleRegisterButton() {
     if (this.state.userName && this.state.password && this.state.userEmail) {
+      console.log(this.state);
       register(this.state.userEmail, this.state.userName, this.state.password)
-        .then(() => {
+        .then((rjson) => {
+          console.log(rjson);
           this.props.navigator.push(loginNavigatorRoute());
         })
         .catch(console.log);
