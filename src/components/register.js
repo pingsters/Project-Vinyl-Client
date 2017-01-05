@@ -51,12 +51,9 @@ export default class Register extends Component {
 
   handleRegisterButton() {
     if (this.state.userName && this.state.password && this.state.userEmail) {
-      console.log(this.state);
+      // todo: handle duplicate signup
       register(this.state.userEmail, this.state.userName, this.state.password)
-        .then((rjson) => {
-          console.log(rjson);
-          this.props.navigator.push(loginNavigatorRoute());
-        })
+        .then(() => this.props.navigator.push(loginNavigatorRoute()))
         .catch(console.log);
     }
     else {
